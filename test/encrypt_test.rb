@@ -31,6 +31,7 @@ class EncryptTest < Minitest::Test
     assert @encrypt.output.match(/[0-3]{1}\d{1}[0-1]{1}[0-9]{1}[0-9]{2}/)
   end
 
+  def test_it
 
 
   # def test_it_can_open_and_save_a_new_file
