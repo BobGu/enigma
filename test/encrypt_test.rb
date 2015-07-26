@@ -2,6 +2,7 @@ require 'pry'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/encrypt'
+require './lib/key_generator'
 
 class EncryptTest < Minitest::Test
   def setup
@@ -18,11 +19,19 @@ class EncryptTest < Minitest::Test
     assert_equal 'encrypted.txt', @encrypt.encrypted_filename
   end
 
-  def test_output_contains_a_five_digit_key
+  def test_key_is_five_digits_long
     setup
     @encrypt.encrypt
-    assert @encrypt.match(/[0-5]{5}/)
+    assert @encrypt.output.match(/[0-9]{5}/)
   end
+
+  def test_it_can_return_todays_date_in_DDMMYY_format
+    setup
+    @encrypt.encrypt
+    assert @encrypt.output.match(/[0-3]{1}\d{1}[0-1]{1}[0-9]{1}[0-9]{2}/)
+  end
+
+
 
   # def test_it_can_open_and_save_a_new_file
   #   encrypt = Encrypt.new('message.txt', 'encrypted.txt')
